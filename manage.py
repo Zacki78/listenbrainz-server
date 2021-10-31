@@ -270,6 +270,13 @@ def set_rate_limits(per_token_limit, per_ip_limit, window_size):
 
 
 @cli.command(name="recalculate_all_user_data")
+def update_all_user_listen_counts():
+    """ Scans listen table and update listen counts for all users """
+    application = webserver.create_app()
+    with application.app_context():
+        ts_update_user_listen_counts()
+
+@cli.command(name="recalculate_all_user_data")
 def recalculate_all_user_data():
     """
         Recalculate all user timestamps and listen counts. ONLY USE THIS WHEN YOU KNOW
