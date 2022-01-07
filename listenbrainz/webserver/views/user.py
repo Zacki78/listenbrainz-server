@@ -438,7 +438,6 @@ def delete_listens_history(musicbrainz_id):
 
     user = _get_user(musicbrainz_id)
     timescale_connection._ts.delete(musicbrainz_id, user.id)
-    timescale_connection._ts.reset_listen_count(musicbrainz_id)
     listens_importer.update_latest_listened_at(user.id, ExternalServiceType.LASTFM, 0)
     db_stats.delete_user_stats(user.id)
 
