@@ -18,10 +18,7 @@ class TimescaleWriterTestCase(IntegrationTestCase):
 
     def setUp(self):
         super(TimescaleWriterTestCase, self).setUp()
-        self.ls = TimescaleListenStore({'REDIS_HOST': config.REDIS_HOST,
-                                       'REDIS_PORT': config.REDIS_PORT,
-                                       'REDIS_NAMESPACE': config.REDIS_NAMESPACE,
-                                       'SQLALCHEMY_TIMESCALE_URI': config.SQLALCHEMY_TIMESCALE_URI}, self.app.logger)
+        self.ls = TimescaleListenStore(self.app)
         self.rs = redis_connection._redis
 
     def tearDown(self):
