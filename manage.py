@@ -269,7 +269,7 @@ def set_rate_limits(per_token_limit, per_ip_limit, window_size):
         set_rate_limits(per_token_limit, per_ip_limit, window_size)
 
 
-@cli.command(name="recalculate_all_user_data")
+@cli.command(name="update_all_user_listen_counts")
 def update_all_user_listen_counts():
     """ Scans listen table and update listen counts for all users """
     application = webserver.create_app()
