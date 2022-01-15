@@ -11,8 +11,8 @@ from listenbrainz import db
 from listenbrainz import webserver
 from listenbrainz.db import timescale as ts
 from listenbrainz.listenstore import timescale_fill_userid
-from listenbrainz.listenstore.timescale_utils import recalculate_all_user_data as ts_recalculate_all_user_data, \
-    refresh_listen_count_aggregate as ts_refresh_listen_count_aggregate
+from listenbrainz.listenstore.timescale_utils import recalculate_all_user_data as ts_recalculate_all_user_data \
+    , update_user_listen_counts as ts_update_user_listen_counts
 from listenbrainz.webserver import create_app
 
 
@@ -271,26 +271,20 @@ def set_rate_limits(per_token_limit, per_ip_limit, window_size):
 
 @cli.command(name="update_all_user_listen_counts")
 def update_all_user_listen_counts():
-    """ Scans listen table and update listen counts for all users """
+    """ Scans listen table since last run and updates listen counts for all users """
     application = webserver.create_app()
     with application.app_context():
         ts_update_user_listen_counts()
 
+
 @cli.command(name="recalculate_all_user_data")
 def recalculate_all_user_data():
     """
-        Recalculate all user timestamps and listen counts. ONLY USE THIS WHEN YOU KNOW
+        Recalculate all user timestamps. ONLY USE THIS WHEN YOU KNOW
         WHAT YOU ARE DOING!
     """
     ts_recalculate_all_user_data()
 
-
-@cli.command(name="refresh_continuous_aggregates")
-def refresh_continuous_aggregates():
-    """
-        Update the continuous aggregates in timescale.
-    """
-    ts_refresh_listen_count_aggregate()
 
 @cli.command()
 @click.option("-u", "--user", type=str)
