@@ -11,7 +11,7 @@ from listenbrainz import db
 from listenbrainz import webserver
 from listenbrainz.db import timescale as ts
 from listenbrainz.listenstore import timescale_fill_userid
-from listenbrainz.listenstore.timescale_utils import recalculate_all_user_data as ts_recalculate_all_user_data \
+from listenbrainz.listenstore.timescale_utils import recalculate_all_user_data as ts_recalculate_all_user_data\
     , update_user_listen_counts as ts_update_user_listen_counts
 from listenbrainz.webserver import create_app
 
